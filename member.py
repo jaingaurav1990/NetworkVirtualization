@@ -7,9 +7,13 @@ import sys, getopt
 import logging
 import urllib2
 import signal # Just to ensure that KeyboardInterrupt exception goes to main thread and no one else. See Python threading caveats on docs.python.org
+import subprocess
+import os
+import re
 
 LOGFILE = "log.txt"
-LISTEN_PORT = 9797
+LATENCYFILE = "latency.txt"
+LISTEN_PORT = 52334
 SEEDS = "seeds.txt"
 MEMBERS = "members.txt"
 COORDINATOR_CHECK_INTERVAL = 5 # 5 seconds
@@ -20,7 +24,7 @@ PING_RETRIES = 2
 PONG_RETRIES = 2
 PROBE_INTERVAL = 5
 NotReceivedCoordinatorUpdate = True
-
+latency = {}
 def stringOfMembers():
     """Returns a space separated all member string"""
     memString = '['
@@ -46,7 +50,7 @@ def distributeMembersFile(members):
             networking.perfectReceive(4, conn)
         except Exception: # Desperate hack as except socket.error was somehow not catching "Connection refused" exceptions
              exctype, value = sys.exc_info()[:2]
-             logging.info("General exception: " + str(exctype) + " Value: " + str(value))
+             logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
  
              logging.critical(node + " missed out on an updated copy of members file")
         finally:
@@ -88,18 +92,91 @@ def removeMembers(nodeIdList):
         if node not in nodeIdList:
             f.write(node + '\n')
         else:
-            logging.info("Removing disconnected node " + node + " from members.txt file")
+            logging.debug("Removing disconnected node " + node + " from members.txt file")
     f.close()
     # Send updated list to all active members
     members = listMembers()
     distributeMembersFile(members)
 
 def rewriteMembersFile(members):
-    logging.info("Chosen to be the Coordinator. Rewriting members file")
+    logging.debug("Chosen to be the Coordinator. Rewriting members file")
     f = open(MEMBERS, 'w')
     for node in members:
         f.write(node + '\n')
     f.close()
+
+def sendLatencyMeasurements(coordinatorCopy):
+    """ Send latency measurements to the Coordinator"""
+    logging.debug("sendLatencyMeasurements() begins")
+    me = socket.gethostname()
+    conn = None
+    try:
+        conn = networking.getConnection(coordinatorCopy, LISTEN_PORT)
+
+        numberOfEntries = len(latency)
+        stringNumberOfEntries = ''
+        if numberOfEntries < 10:
+           stringNumberOfEntries = '0' + str(numberOfEntries) 
+        else:
+            stringNumberOfEntries = str(numberOfEntries)
+
+        networking.perfectSend('LTNC', conn)
+        networking.perfectSend(stringNumberOfEntries, conn)
+
+        for node, value in latency.iteritems():
+            measurement = "[" + me + ", " + node + ", " + str(value) + "]"
+            networking.perfectSend(str(len(measurement)), conn)
+            networking.perfectSend(measurement, conn)
+
+        logging.debug("Printing latency dictionary:" + str(latency))
+
+
+    except Exception:
+        exctype, value = sys.exc_info()[:2]
+        logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+        logging.debug("Failed in sending some or all latency measurements to " + coordinatorCopy)
+    finally:
+        if conn:
+            networking.closeConnection(conn)
+
+# Reference/Credits: User Ignacio Verona's question on Stackoverflow "Parsing ping output with Python"
+def senseLatency():
+    """Measure latency between this node and other members in the overlay"""
+    logging.debug("senseLatency() begins")
+    members = listMembers()
+    me = socket.gethostname()
+
+    for node in members:
+        node = node.strip()
+        if node == me:
+            continue
+        else:
+            output = os.popen('ping ' + node + " -c 5 -q  | egrep \"packet loss|rtt\"").read()
+            match = re.search('([\d]*\.[\d]*)/([\d]*\.[\d]*)/([\d]*\.[\d]*)/([\d]*\.[\d]*)', output)
+
+            if match:
+                a = 0.9
+                ping_min = match.group(1)
+                ping_avg = match.group(2)
+                ping_max = match.group(3)
+                if node not in latency:
+                   # print ping_avg
+                   latency[node] = ping_avg 
+                else:
+                    prev = float(latency[node])
+                    latency[node] = 0.9*prev
+                    latency[node] = latency[node] + (0.1)*float(ping_avg)
+
+                tstamp = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+                readingString = "[" + me + ", " + node + ", " + str(ping_avg) + ", " + str(latency[node]) + " , " + tstamp + "]\n"
+                f = open(LATENCYFILE, 'a')
+                f.write(readingString)
+                f.close()
+            else:
+                logging.debug("No regex match found")
+
+            # match = re.search('(\d*)% packet loss', output)
+            # pkt_loss = match.group(1)
 
 def electCoordinator():
     """Handles the node behavior when coordinator failure has been detected"""
@@ -133,7 +210,7 @@ def electCoordinator():
                         networking.perfectReceive(4, conn)
                     except Exception: # Bare except!!
                         exctype, value = sys.exc_info()[:2]
-                        logging.info("General exception: " + str(exctype) + " Value: " + str(value))
+                        logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
  
                         activeMembers.remove(node)
                         logging.debug("electCoordinator(): Removing " + node + " from the list of activeMembers")
@@ -168,7 +245,7 @@ def electCoordinator():
 
                     except Exception: # FIXME: 'Bare' except is considered bad
                         exctype, value = sys.exc_info()[:2]
-                        logging.info("General exception: " + str(exctype) + " Value: " + str(value))
+                        logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
                         logging.debug("Before removing " + node + ":" + str(activeMembers))
                         activeMembers.remove(node)
                         logging.debug("electCoordinator(): Removing " + node + " from the list of activeMembers")
@@ -243,8 +320,9 @@ def join(Coordinator):
         networking.perfectSend(nameLen, conn)
         networking.perfectSend(me, conn)
         networking.closeConnection(conn) # TODO: Possibly use this connection to download updated members file
-    except socket.error, msg:
-        logging.info(msg)
+    except Exception:
+        exctype, value = sys.exc_info()[:2]
+        logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
         if conn:
             networking.closeConnection(conn)
         raise
@@ -261,25 +339,37 @@ class handleMessage(threading.Thread):
         global Coordinator
         global NotReceivedCoordinatorUpdate
         MSGTYPE_LEN = 4
-        msgType = networking.perfectReceive(MSGTYPE_LEN, self.clientSocket)
-        # msgType is either JOIN, LEAV OR LOOK (Coordinator Lookup)
+        msgType = ''
+        try:
+            msgType = networking.perfectReceive(MSGTYPE_LEN, self.clientSocket)
+        except Exception:
+            exctype, value = sys.exc_info()[:2]
+            logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+            if self.clientSocket:
+                networking.closeConnection(self.clientSocket)
+            return
+            
+            # msgType is either JOIN, LEAV OR LOOK (Coordinator Lookup)
         # Following two characters denote length of nodename
         if msgType == 'JOIN' or msgType == 'LEAV': # FIXME: Only Coordinator should receive such message
-            logging.info("Received " + msgType + " message")
             try:
+                logging.info("Received " + msgType + " message")
                 nameLen = int(networking.perfectReceive(NAMELEN_LEN, self.clientSocket))  # NAMELEN_HDR is 2 characters. Example: 25
                 nodeName = networking.perfectReceive(nameLen, self.clientSocket)
-            except socket.error, msg:
-                logging.debug(msg)
-            else:
                 if msgType == 'JOIN':
                     addMember(nodeName)
                     memString = stringOfMembers()
-                    logging.info("[EVENT JOIN]: " + nodeName + "\n[MEMBERS]: " + memString)
+                    logging.info("\n[EVENT JOIN]: " + nodeName + "\n[MEMBERS]: " + memString)
                 else:
                     removeMembers(nodeName)
                     memString = stringOfMembers()
-                    logging.info("[EVENT LEAVE]: " + nodeName + "\n[MEMBERS]: " + memString)
+                    logging.info("\n[EVENT LEAVE]: " + nodeName + "\n[MEMBERS]: " + memString)
+            except Exception:
+                exctype, value = sys.exc_info()[:2]
+                logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+            finally:
+                if self.clientSocket:
+                    networking.closeConnection(self.clientSocket)
 
 
         elif msgType == 'LKUP':
@@ -291,25 +381,30 @@ class handleMessage(threading.Thread):
                     networking.perfectSend(Coordinator, self.clientSocket)
                 else:
                     networking.perfectSend('NONE', self.clientSocket)
-            except socket.error, msg:
-                logging.debug(msg)
+            except Exception:
+                exctype, value = sys.exc_info()[:2]
+                logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+            finally:
+                if self.clientSocket:
+                    networking.closeConnection(self.clientSocket)
 
         elif msgType == 'DWLD':
             logging.debug("Received indication to download members.txt file")
             try:
-                f = urllib2.urlopen('http://' + Coordinator + ':' + str(HTTP_PORT) + '/' + MEMBERS)
+                f = urllib2.urlopen('http://' + Coordinator + ':' + str(HTTP_PORT) + '/' + MEMBERS) # FIXME: Does this require closing?
                 localMembersFile = open(MEMBERS, 'w')
                 localMembersFile.write(f.read())
                 localMembersFile.close()
                 memString = stringOfMembers()
                 logging.info("\n[COORDINATOR]: " + Coordinator + "\n[UPDATE LOCAL MEMBERS FILE]: \n[MEMBERS]: " + memString)
                 networking.perfectSend('DONE', self.clientSocket)
-            except: # Bare except!!
+            except Exception: # Bare except!!
                 exctype, value = sys.exc_info()[:2]
-                logging.info("General exception: " + str(exctype) + " Value: " + str(value))
- 
+                logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
                 logging.critical("Could not download members file from " + Coordinator)
-
+            finally:
+                if self.clientSocket:
+                    networking.closeConnection(self.clientSocket)
              
         elif msgType == 'NEWC': # New coordinator has announced its arrival
             try:
@@ -317,13 +412,34 @@ class handleMessage(threading.Thread):
                 Coordinator = networking.perfectReceive(nameLen, self.clientSocket)
                 networking.perfectSend('UPDC', self.clientSocket)
                 NotReceivedCoordinatorUpdate = False # Breaks the loop of electCoordinator() function
-            except socket.error, msg:
-                logging.info(msg)
-                logging.info("Failed to receive the new Coordinator [NEWC] announcement")
+                logging.info("Received New Coordinator [NEWC] announcement from " + Coordinator)
+            except Exception:
+                exctype, value = sys.exc_info()[:2]
+                logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+                logging.debug("Failed to receive the new Coordinator [NEWC] announcement")
                 Coordinator = ''
                 NotReceivedCoordinatorUpdate = True
-            else:
-                logging.info("Received New Coordinator [NEWC] announcement from " + Coordinator)
+            finally:
+                if self.clientSocket:
+                    networking.closeConnection(self.clientSocket)
+
+        elif msgType == 'LTNC':
+            logging.debug("Member sending latency measurements")
+            try:
+                numberOfEntries = int(networking.perfectReceive(2, self.clientSocket))
+                for i in range(numberOfEntries):
+                    measurementLen = int(networking.perfectReceive(2, self.clientSocket))
+                    measurement = networking.perfectReceive(measurementLen, self.clientSocket)
+                    logging.debug(measurement) # Only logging for time being
+
+            except Exception:
+                exctype, value = sys.exc_info()[:2]
+                logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+                logging.debug("Did not receive all latency measurements from the member")
+            finally:
+                if self.clientSocket:
+                    networking.closeConnection(self.clientSocket)
+
 
         elif msgType == 'CHCK': # Message from a member checking if higher ranked nodes are still alive
             logging.debug("Received Check Alive [CHCK] message from a member")
@@ -349,7 +465,7 @@ class listener(threading.Thread):
             childThreads = []
         except Exception:
             exctype, value = sys.exc_info()[:2]
-            logging.info("General exception: " + str(exctype) + " Value: " + str(value))
+            logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
 
             if serverSocket:
                 serverSocket.close()
@@ -381,11 +497,12 @@ def coordinatorLookup():
                     if response == 'RPLY':
                         nameLen = int(networking.perfectReceive(2, conn))
                         Coordinator = networking.perfectReceive(nameLen, conn)
+                        logging.debug("Received RPLY " + Coordinator + " in coordinatorLookup()")
                     elif response == 'NONE':
-                        pass
+                        logging.debug(node + " doesn't know about the coordinator")
                 except Exception:
                     exctype, value = sys.exc_info()[:2]
-                    logging.info("General exception: " + str(exctype) + " Value: " + str(value))
+                    logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
                     Coordinator = '' # If we got error, the node we were talking wasn't a good candidate for coordinator anyway
                 finally:
                     if conn:
@@ -403,7 +520,7 @@ def coordinatorLookup():
     if Coordinator == '':
         Coordinator = me
         
-    logging.info("[COORDINATOR]: " + Coordinator)
+    logging.info("coordinatorLookup returning [COORDINATOR]: " + Coordinator)
     return Coordinator
 
 def bootstrap(startAsCoordinator):
@@ -423,8 +540,10 @@ def bootstrap(startAsCoordinator):
             if canBeCoordinator != socket.gethostname():
                 try:
                     join(canBeCoordinator)
-                except socket.error, msg:
-                    logging.info("Joining the Coordinator " + Coordinator + " failed. Retry Coordinator Lookup")
+                except Exception:
+                    exctype, value = sys.exc_info()[:2]
+                    logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+                    logging.debug("Joining the Coordinator " + Coordinator + " failed. Retry Coordinator Lookup")
             else:
                 isCoordinator = True
                 Coordinator = canBeCoordinator
@@ -462,14 +581,23 @@ def main(argv):
     pingHandler.daemon = True
     pingHandler.start()
     do_exit = False
+    interval = 0
+
     while do_exit == False:
         try:
-            time.sleep(0.1)
             if messageHandler.err != 0:
                 do_exit = True
 
+            senseLatency()
+            interval = interval + 1
+            if interval == 1:
+                if Coordinator != socket.gethostname() and Coordinator != '':
+                    sendLatencyMeasurements(Coordinator)
+                    interval = 0
+
+            time.sleep(5)
         except KeyboardInterrupt:
-            print "Ctrl-C caught. Exit after terminating daemon threads..."
+            print "Ctrl-C caught. Exit would terminate daemon threads..."
             do_exit = True
 
     # Stop running threads
@@ -484,10 +612,10 @@ def main(argv):
             networking.perfectSend(me, conn)
             logging.debug("Sent LEAV message to " + Coordinator)
             networking.closeConnection(conn)
-        except Exception: # Desperate Hack 'Bare' except
+        except Exception: 
             exctype, value = sys.exc_info()[:2]
-            logging.info("General exception: " + str(exctype) + " Value: " + str(value))
-            logging.info("Failed to send LEAV message to " + Coordinator)
+            logging.debug("General exception: " + str(exctype) + " Value: " + str(value))
+            logging.debug("Failed to send LEAV message to " + Coordinator)
 
     sys.exit(0)
 
