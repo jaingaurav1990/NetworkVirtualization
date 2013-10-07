@@ -1,0 +1,3 @@
+for HOST in planetlab3.inf.ethz.ch planetlab1.informatik.uni-erlangen.de planetlab01.cs.washington.edu planetlab4.ie.cuhk.edu.hk; do
+    scp -P 22022 -i jaing overlay.py networking.py seeds.txt jaing@$HOST:/home/jaing
+done

@@ -1,0 +1,3 @@
+for HOST in planetlab1.inf.ethz.ch planetlab2.inf.ethz.ch planetlab3.inf.ethz.ch planetlab4.inf.ethz.ch; do
+    scp -P 22022 -i jaing member.py networking.py seeds.txt jaing@$HOST:/home/jaing
+done

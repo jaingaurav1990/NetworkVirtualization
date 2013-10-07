@@ -1,0 +1,4 @@
+planetlab3.inf.ethz.ch
+planetlab4.ie.cuhk.edu.hk
+planetlab01.cs.washington.edu
+planetlab1.informatik.uni-erlangen.de

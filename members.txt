@@ -1,0 +1,4 @@
+ple01.fc.univie.ac.at
+planetlab1.xeno.cl.cam.ac.uk
+planetlab-4.eecs.cwru.edu
+planetlab1.acis.ufl.edu

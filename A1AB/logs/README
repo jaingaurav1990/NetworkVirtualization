@@ -1,0 +1,18 @@
+Scenario description:
+
+1. European node planetlab3.ethz.ch starts off as the coordinator.
+US node planetlab01.cs.washington.edu, another European node planetlab1.informatik.uni-erlangen.de,
+and Asian node planetlab4.ie.cuhk.edu.hk join as members.
+
+2. China node(*.hk) leaves. It sends a LEAV message to coordinator ETH node
+which distributes the updated file to US and other European node.
+
+3. US node (*.edu) detects a 'false' timeout of the coordinator ETH node. US node
+has a higher rank and it overrides the lower-rank (lexicographically) ETH node and 
+itself becomes the new coordinator.
+
+4. The other European node (*.de) leaves. It sends a LEAV message to coordinator
+US node. US node distributes updated information to ETH node.
+
+5. Coordinator US node is killed off. Member ETH node detects this and itself becomes 
+the new coordinator. Also, the last node standing in overlay

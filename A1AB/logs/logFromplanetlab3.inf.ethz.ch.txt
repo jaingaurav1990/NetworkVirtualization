@@ -1,0 +1,285 @@
+2013-10-07 04:18:29,222 INFO 
+========== NEW EXPERIMENT STARTS ==========
+
+
+2013-10-07 04:18:29,228 DEBUG Starting life as a normal member
+2013-10-07 04:18:29,228 DEBUG Checking if planetlab4.ie.cuhk.edu.hk knows the coordinator
+2013-10-07 04:18:29,440 DEBUG General exception: <class 'socket.error'> Value: (111, 'Connection refused')
+2013-10-07 04:18:29,440 DEBUG Checking if planetlab01.cs.washington.edu knows the coordinator
+2013-10-07 04:18:29,624 DEBUG General exception: <class 'socket.error'> Value: (111, 'Connection refused')
+2013-10-07 04:18:29,624 DEBUG Checking if planetlab1.informatik.uni-erlangen.de knows the coordinator
+2013-10-07 04:18:29,642 DEBUG General exception: <class 'socket.error'> Value: (111, 'Connection refused')
+2013-10-07 04:18:34,647 INFO coordinatorLookup returning [COORDINATOR]: planetlab3.inf.ethz.ch
+2013-10-07 04:18:34,647 DEBUG Coordinator lookup returned: planetlab3.inf.ethz.ch
+2013-10-07 04:18:34,647 DEBUG senseLatency() begins
+2013-10-07 04:18:57,741 DEBUG Received LKUP message
+2013-10-07 04:18:58,130 INFO Received JOIN message
+2013-10-07 04:18:59,124 INFO 
+[EVENT JOIN]: planetlab01.cs.washington.edu
+[MEMBERS]: [ planetlab3.inf.ethz.ch planetlab01.cs.washington.edu]
+2013-10-07 04:19:04,678 DEBUG senseLatency() begins
+2013-10-07 04:19:38,853 DEBUG Received LKUP message
+2013-10-07 04:19:38,909 DEBUG senseLatency() begins
+2013-10-07 04:19:39,279 INFO Received JOIN message
+2013-10-07 04:19:41,128 INFO 
+[EVENT JOIN]: planetlab4.ie.cuhk.edu.hk
+[MEMBERS]: [ planetlab3.inf.ethz.ch planetlab01.cs.washington.edu planetlab4.ie.cuhk.edu.hk]
+2013-10-07 04:20:13,140 DEBUG senseLatency() begins
+2013-10-07 04:20:22,810 DEBUG Received LKUP message
+2013-10-07 04:20:22,845 INFO Received JOIN message
+2013-10-07 04:20:24,559 INFO 
+[EVENT JOIN]: planetlab1.informatik.uni-erlangen.de
+[MEMBERS]: [ planetlab3.inf.ethz.ch planetlab01.cs.washington.edu planetlab4.ie.cuhk.edu.hk planetlab1.informatik.uni-erlangen.de]
+2013-10-07 04:20:51,618 DEBUG senseLatency() begins
+2013-10-07 04:21:34,098 DEBUG senseLatency() begins
+2013-10-07 04:22:16,581 DEBUG senseLatency() begins
+2013-10-07 04:22:59,059 DEBUG senseLatency() begins
+2013-10-07 04:23:41,533 DEBUG senseLatency() begins
+2013-10-07 04:24:24,019 DEBUG senseLatency() begins
+2013-10-07 04:25:06,503 DEBUG senseLatency() begins
+2013-10-07 04:25:09,627 DEBUG Member sending latency measurements
+2013-10-07 04:25:09,627 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 177.126436194]
+2013-10-07 04:25:09,627 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.267706467]
+2013-10-07 04:25:09,628 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.228257245]
+2013-10-07 04:25:48,990 DEBUG senseLatency() begins
+2013-10-07 04:26:00,544 DEBUG Member sending latency measurements
+2013-10-07 04:26:00,544 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.560520651]
+2013-10-07 04:26:00,544 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.789710464]
+2013-10-07 04:26:00,544 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 176.640163705]
+2013-10-07 04:26:31,467 DEBUG senseLatency() begins
+2013-10-07 04:26:46,413 DEBUG Member sending latency measurements
+2013-10-07 04:26:46,413 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.479249231]
+2013-10-07 04:26:46,414 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6098212505]
+2013-10-07 04:26:46,414 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.992354012]
+2013-10-07 04:27:13,950 DEBUG senseLatency() begins
+2013-10-07 04:27:56,428 DEBUG senseLatency() begins
+2013-10-07 04:28:38,912 DEBUG senseLatency() begins
+2013-10-07 04:29:21,394 DEBUG senseLatency() begins
+2013-10-07 04:30:03,875 DEBUG senseLatency() begins
+2013-10-07 04:30:46,354 DEBUG senseLatency() begins
+2013-10-07 04:31:28,837 DEBUG senseLatency() begins
+2013-10-07 04:32:11,318 DEBUG senseLatency() begins
+2013-10-07 04:32:17,652 DEBUG Member sending latency measurements
+2013-10-07 04:32:17,652 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 176.938836834]
+2013-10-07 04:32:17,652 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.367167973]
+2013-10-07 04:32:17,653 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.233212146]
+2013-10-07 04:32:53,807 DEBUG senseLatency() begins
+2013-10-07 04:33:09,384 DEBUG Member sending latency measurements
+2013-10-07 04:33:09,384 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.466516055]
+2013-10-07 04:33:09,384 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.756882796]
+2013-10-07 04:33:09,384 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 176.770937623]
+2013-10-07 04:33:36,306 DEBUG senseLatency() begins
+2013-10-07 04:33:52,670 DEBUG Member sending latency measurements
+2013-10-07 04:33:52,670 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.445423863]
+2013-10-07 04:33:52,670 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6101553994]
+2013-10-07 04:33:52,670 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.550844747]
+2013-10-07 04:34:18,785 DEBUG senseLatency() begins
+2013-10-07 04:35:01,270 DEBUG senseLatency() begins
+2013-10-07 04:35:43,760 DEBUG senseLatency() begins
+2013-10-07 04:36:26,249 DEBUG senseLatency() begins
+2013-10-07 04:37:08,757 DEBUG senseLatency() begins
+2013-10-07 04:37:51,242 DEBUG senseLatency() begins
+2013-10-07 04:38:33,737 DEBUG senseLatency() begins
+2013-10-07 04:39:16,574 DEBUG senseLatency() begins
+2013-10-07 04:39:25,467 DEBUG Member sending latency measurements
+2013-10-07 04:39:25,467 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 176.881298095]
+2013-10-07 04:39:25,468 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 195.302891651]
+2013-10-07 04:39:25,468 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.610503789]
+2013-10-07 04:39:59,058 DEBUG senseLatency() begins
+2013-10-07 04:40:18,232 DEBUG Member sending latency measurements
+2013-10-07 04:40:18,232 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.463546875]
+2013-10-07 04:40:18,232 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.809992334]
+2013-10-07 04:40:18,233 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 176.76541409]
+2013-10-07 04:40:41,546 DEBUG senseLatency() begins
+2013-10-07 04:40:58,931 DEBUG Member sending latency measurements
+2013-10-07 04:40:58,931 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.457780185]
+2013-10-07 04:40:58,931 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6186843789]
+2013-10-07 04:40:58,931 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.385786423]
+2013-10-07 04:41:24,029 DEBUG senseLatency() begins
+2013-10-07 04:42:06,512 DEBUG senseLatency() begins
+2013-10-07 04:42:48,998 DEBUG senseLatency() begins
+2013-10-07 04:43:31,481 DEBUG senseLatency() begins
+2013-10-07 04:44:13,965 DEBUG senseLatency() begins
+2013-10-07 04:44:56,446 DEBUG senseLatency() begins
+2013-10-07 04:45:38,937 DEBUG senseLatency() begins
+2013-10-07 04:46:21,413 DEBUG senseLatency() begins
+2013-10-07 04:46:32,680 DEBUG Member sending latency measurements
+2013-10-07 04:46:32,680 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 176.813282118]
+2013-10-07 04:46:32,680 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.950339369]
+2013-10-07 04:46:32,680 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.463968091]
+2013-10-07 04:47:03,892 DEBUG senseLatency() begins
+2013-10-07 04:47:26,611 DEBUG Member sending latency measurements
+2013-10-07 04:47:26,611 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.443737735]
+2013-10-07 04:47:26,612 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.796249056]
+2013-10-07 04:47:26,612 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 176.790562824]
+2013-10-07 04:47:46,371 DEBUG senseLatency() begins
+2013-10-07 04:48:05,092 DEBUG Member sending latency measurements
+2013-10-07 04:48:05,092 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.415849819]
+2013-10-07 04:48:05,092 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6186800334]
+2013-10-07 04:48:05,092 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.31819852]
+2013-10-07 04:48:28,856 DEBUG senseLatency() begins
+2013-10-07 04:49:11,364 DEBUG senseLatency() begins
+2013-10-07 04:49:53,849 DEBUG senseLatency() begins
+2013-10-07 04:50:36,334 DEBUG senseLatency() begins
+2013-10-07 04:51:18,815 DEBUG senseLatency() begins
+2013-10-07 04:52:02,075 DEBUG senseLatency() begins
+2013-10-07 04:52:44,557 DEBUG senseLatency() begins
+2013-10-07 04:53:27,033 DEBUG senseLatency() begins
+2013-10-07 04:53:40,391 DEBUG Member sending latency measurements
+2013-10-07 04:53:40,391 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 177.092691266]
+2013-10-07 04:53:40,391 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.867170683]
+2013-10-07 04:53:40,391 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.460662136]
+2013-10-07 04:54:09,518 DEBUG senseLatency() begins
+2013-10-07 04:54:40,506 DEBUG Member sending latency measurements
+2013-10-07 04:54:40,506 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.456811008]
+2013-10-07 04:54:40,506 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.959904316]
+2013-10-07 04:54:40,507 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 176.849780692]
+2013-10-07 04:54:52,000 DEBUG senseLatency() begins
+2013-10-07 04:55:11,261 DEBUG Member sending latency measurements
+2013-10-07 04:55:11,261 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.501457302]
+2013-10-07 04:55:11,261 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6202459719]
+2013-10-07 04:55:11,262 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.264954909]
+2013-10-07 04:55:34,494 DEBUG senseLatency() begins
+2013-10-07 04:56:17,021 DEBUG senseLatency() begins
+2013-10-07 04:56:59,512 DEBUG senseLatency() begins
+2013-10-07 04:57:41,994 DEBUG senseLatency() begins
+2013-10-07 04:58:24,478 DEBUG senseLatency() begins
+2013-10-07 04:59:06,954 DEBUG senseLatency() begins
+2013-10-07 04:59:49,434 DEBUG senseLatency() begins
+2013-10-07 05:00:32,088 DEBUG senseLatency() begins
+2013-10-07 05:00:48,093 DEBUG Member sending latency measurements
+2013-10-07 05:00:48,093 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 176.98861247]
+2013-10-07 05:00:48,093 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.476641942]
+2013-10-07 05:00:48,093 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.423808855]
+2013-10-07 05:01:14,571 DEBUG senseLatency() begins
+2013-10-07 05:01:49,375 DEBUG Member sending latency measurements
+2013-10-07 05:01:49,375 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.50142082]
+2013-10-07 05:01:49,376 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.881048254]
+2013-10-07 05:01:49,376 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 176.889114386]
+2013-10-07 05:01:57,052 DEBUG senseLatency() begins
+2013-10-07 05:02:17,335 DEBUG Member sending latency measurements
+2013-10-07 05:02:17,335 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.605321592]
+2013-10-07 05:02:17,336 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6154182504]
+2013-10-07 05:02:17,336 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.303945357]
+2013-10-07 05:02:39,534 DEBUG senseLatency() begins
+2013-10-07 05:03:22,016 DEBUG senseLatency() begins
+2013-10-07 05:04:04,497 DEBUG senseLatency() begins
+2013-10-07 05:04:46,980 DEBUG senseLatency() begins
+2013-10-07 05:05:29,461 DEBUG senseLatency() begins
+2013-10-07 05:06:11,950 DEBUG senseLatency() begins
+2013-10-07 05:06:54,440 DEBUG senseLatency() begins
+2013-10-07 05:07:36,992 DEBUG senseLatency() begins
+2013-10-07 05:07:55,798 DEBUG Member sending latency measurements
+2013-10-07 05:07:55,798 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 176.972789775]
+2013-10-07 05:07:55,798 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.38886148]
+2013-10-07 05:07:55,798 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.307829119]
+2013-10-07 05:08:19,497 DEBUG senseLatency() begins
+2013-10-07 05:08:57,801 DEBUG Member sending latency measurements
+2013-10-07 05:08:57,802 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.551828366]
+2013-10-07 05:08:57,802 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.812446973]
+2013-10-07 05:08:57,802 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 177.144248567]
+2013-10-07 05:09:01,982 DEBUG senseLatency() begins
+2013-10-07 05:09:23,426 DEBUG Member sending latency measurements
+2013-10-07 05:09:23,426 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.494698918]
+2013-10-07 05:09:23,426 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6187894008]
+2013-10-07 05:09:23,426 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.276149882]
+2013-10-07 05:09:44,459 DEBUG senseLatency() begins
+2013-10-07 05:10:26,943 DEBUG senseLatency() begins
+2013-10-07 05:11:09,422 DEBUG senseLatency() begins
+2013-10-07 05:11:51,905 DEBUG senseLatency() begins
+2013-10-07 05:12:34,385 DEBUG senseLatency() begins
+2013-10-07 05:13:16,867 DEBUG senseLatency() begins
+2013-10-07 05:13:59,344 DEBUG senseLatency() begins
+2013-10-07 05:14:41,827 DEBUG senseLatency() begins
+2013-10-07 05:15:03,287 DEBUG Member sending latency measurements
+2013-10-07 05:15:03,364 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 177.338488294]
+2013-10-07 05:15:03,364 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.339479362]
+2013-10-07 05:15:03,365 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.29897264]
+2013-10-07 05:15:24,308 DEBUG senseLatency() begins
+2013-10-07 05:16:06,790 DEBUG Member sending latency measurements
+2013-10-07 05:16:06,790 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab1.informatik.uni-erlangen.de, 348.502045866]
+2013-10-07 05:16:06,790 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab3.inf.ethz.ch, 210.814514743]
+2013-10-07 05:16:06,790 DEBUG [planetlab4.ie.cuhk.edu.hk, planetlab01.cs.washington.edu, 176.902563223]
+2013-10-07 05:16:06,792 DEBUG senseLatency() begins
+2013-10-07 05:16:29,539 DEBUG Member sending latency measurements
+2013-10-07 05:16:29,539 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab4.ie.cuhk.edu.hk, 348.433875379]
+2013-10-07 05:16:29,539 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab3.inf.ethz.ch, 16.6118512768]
+2013-10-07 05:16:29,539 DEBUG [planetlab1.informatik.uni-erlangen.de, planetlab01.cs.washington.edu, 174.514768591]
+2013-10-07 05:16:49,345 DEBUG senseLatency() begins
+2013-10-07 05:17:31,828 DEBUG senseLatency() begins
+2013-10-07 05:18:14,310 DEBUG senseLatency() begins
+2013-10-07 05:18:56,794 DEBUG senseLatency() begins
+2013-10-07 05:19:39,277 DEBUG senseLatency() begins
+2013-10-07 05:20:21,766 DEBUG senseLatency() begins
+2013-10-07 05:21:04,258 DEBUG senseLatency() begins
+2013-10-07 05:21:46,741 DEBUG senseLatency() begins
+2013-10-07 05:22:11,241 DEBUG Member sending latency measurements
+2013-10-07 05:22:11,242 DEBUG [planetlab01.cs.washington.edu, planetlab4.ie.cuhk.edu.hk, 179.308866888]
+2013-10-07 05:22:11,242 DEBUG [planetlab01.cs.washington.edu, planetlab3.inf.ethz.ch, 194.245417894]
+2013-10-07 05:22:11,242 DEBUG [planetlab01.cs.washington.edu, planetlab1.informatik.uni-erlangen.de, 174.406391357]
+2013-10-07 05:22:29,225 DEBUG senseLatency() begins
+2013-10-07 05:22:30,904 INFO Received LEAV message
+2013-10-07 05:22:30,905 DEBUG Removing disconnected node planetlab4.ie.cuhk.edu.hk from members.txt file
+2013-10-07 05:22:32,072 INFO 
+[EVENT LEAVE]: planetlab4.ie.cuhk.edu.hk
+[MEMBERS]: [ planetlab3.inf.ethz.ch planetlab01.cs.washington.edu planetlab1.informatik.uni-erlangen.de]
+2013-10-07 05:23:01,123 DEBUG NODE disconnected: planetlab4.ie.cuhk.edu.hk
+2013-10-07 05:23:02,047 INFO Received New Coordinator [NEWC] announcement from planetlab01.cs.washington.edu
+2013-10-07 05:23:03,422 DEBUG Received indication to download members.txt file
+2013-10-07 05:23:04,187 INFO 
+[COORDINATOR]: planetlab01.cs.washington.edu
+[UPDATE LOCAL MEMBERS FILE]: 
+[MEMBERS]: [ planetlab01.cs.washington.edu planetlab1.informatik.uni-erlangen.de planetlab3.inf.ethz.ch]
+2013-10-07 05:23:11,569 DEBUG Received indication to download members.txt file
+2013-10-07 05:23:11,711 DEBUG senseLatency() begins
+2013-10-07 05:23:11,993 INFO 
+[COORDINATOR]: planetlab01.cs.washington.edu
+[UPDATE LOCAL MEMBERS FILE]: 
+[MEMBERS]: [ planetlab01.cs.washington.edu planetlab1.informatik.uni-erlangen.de planetlab3.inf.ethz.ch]
+2013-10-07 05:23:49,973 DEBUG senseLatency() begins
+2013-10-07 05:24:28,232 DEBUG senseLatency() begins
+2013-10-07 05:25:06,493 DEBUG senseLatency() begins
+2013-10-07 05:25:44,758 DEBUG senseLatency() begins
+2013-10-07 05:26:23,022 DEBUG senseLatency() begins
+2013-10-07 05:27:01,286 DEBUG senseLatency() begins
+2013-10-07 05:27:39,547 DEBUG senseLatency() begins
+2013-10-07 05:28:17,812 DEBUG senseLatency() begins
+2013-10-07 05:28:56,067 DEBUG senseLatency() begins
+2013-10-07 05:29:34,321 DEBUG senseLatency() begins
+2013-10-07 05:30:12,585 DEBUG senseLatency() begins
+2013-10-07 05:30:50,844 DEBUG senseLatency() begins
+2013-10-07 05:31:29,102 DEBUG senseLatency() begins
+2013-10-07 05:32:07,360 DEBUG senseLatency() begins
+2013-10-07 05:32:45,619 DEBUG senseLatency() begins
+2013-10-07 05:33:19,887 DEBUG Received indication to download members.txt file
+2013-10-07 05:33:20,478 INFO 
+[COORDINATOR]: planetlab01.cs.washington.edu
+[UPDATE LOCAL MEMBERS FILE]: 
+[MEMBERS]: [ planetlab01.cs.washington.edu planetlab3.inf.ethz.ch]
+2013-10-07 05:33:23,883 DEBUG senseLatency() begins
+2013-10-07 05:33:58,111 DEBUG senseLatency() begins
+2013-10-07 05:34:32,347 DEBUG senseLatency() begins
+2013-10-07 05:35:06,582 DEBUG senseLatency() begins
+2013-10-07 05:35:40,817 DEBUG senseLatency() begins
+2013-10-07 05:36:03,185 INFO pong() detected Coordinator Failure (Timeout)
+2013-10-07 05:36:03,185 DEBUG electCoordinator() begins
+2013-10-07 05:36:03,186 DEBUG ['planetlab01.cs.washington.edu', 'planetlab3.inf.ethz.ch']
+2013-10-07 05:36:03,186 INFO electCoordinator() returned with new Coordinator as 
+2013-10-07 05:36:03,186 DEBUG This node will reply to ping from the Coordinator
+2013-10-07 05:36:15,044 DEBUG senseLatency() begins
+2013-10-07 05:36:33,216 INFO pong() detected Coordinator Failure (Timeout)
+2013-10-07 05:36:33,217 DEBUG electCoordinator() begins
+2013-10-07 05:36:33,217 DEBUG ['planetlab01.cs.washington.edu', 'planetlab3.inf.ethz.ch']
+2013-10-07 05:36:33,217 DEBUG Loop begins: ['planetlab01.cs.washington.edu', 'planetlab3.inf.ethz.ch']
+2013-10-07 05:36:33,217 DEBUG Sending LKUP to planetlab01.cs.washington.edu
+2013-10-07 05:36:33,412 DEBUG General exception: <class 'socket.error'> Value: (111, 'Connection refused')
+2013-10-07 05:36:33,413 DEBUG Before removing planetlab01.cs.washington.edu:['planetlab01.cs.washington.edu', 'planetlab3.inf.ethz.ch']
+2013-10-07 05:36:33,413 DEBUG electCoordinator(): Removing planetlab01.cs.washington.edu from the list of activeMembers
+2013-10-07 05:36:33,413 DEBUG ['planetlab3.inf.ethz.ch']
+2013-10-07 05:36:33,413 DEBUG Loop begins: ['planetlab3.inf.ethz.ch']
+2013-10-07 05:36:33,413 DEBUG Declared myself as the Coordinator: planetlab3.inf.ethz.ch
+2013-10-07 05:36:33,413 DEBUG Chosen to be the Coordinator. Rewriting members file
+2013-10-07 05:36:33,413 INFO electCoordinator() returned with new Coordinator as planetlab3.inf.ethz.ch
+2013-10-07 05:36:33,413 DEBUG This node will send ping to other members
+2013-10-07 05:36:49,279 DEBUG senseLatency() begins
+2013-10-07 05:37:19,309 DEBUG senseLatency() begins

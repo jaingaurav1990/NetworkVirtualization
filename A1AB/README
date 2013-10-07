@@ -1,0 +1,36 @@
+Steps for executing overlay:
+
+1. Start a SimpleHTTPServer on each of the nodes as:
+$ python -m SimpleHTTPServer 9090 1>/dev/null 2>&1 &
+Port 9090 is currently hard-coded in the python application, so can't be replaced
+with another port number
+
+2. Make sure that files overlay.py, networking.py and seeds.txt
+are present in the current directory.
+
+3. Trigger bootstrapping of a node as:
+$ python overlay.py -v
+
+Omit -v flag for less verbose logging.
+As an alternative, one of the nodes (and only one) node can be started as a coordinator.
+Behavior is currently undefined if more than one nodes are started as coordinator.
+To start a node as coordinator, use -c flag:
+$ python overlay.py -c -v
+
+IMPORTANT FILES:
+1. seeds.txt: Should contain the names of all nodes on which overlay has to be 
+started.
+
+2. members.txt: Contains nodes currently part of the overlay as seen by this node.
+
+3. latency.txt: Contains latency measurements as measured by this node to other 
+members of the overlay.
+
+4. log.txt: Contains log output ('EVENT JOIN', 'EVENT LEAVE' etc.)
+
+KNOWN BUGS/IMPROVEMENTS:
+1. Currently, access to the members.txt file is not coordinated between threads. Locking
+mechanism needs to be implemented for safe access.
+2. The global 'Coordinator' should perhaps be replaced as with increase in code-size, it
+becomes difficult to track read/write to the global variable.
+
